@@ -11,6 +11,7 @@ This project takes a huge list of global healthcare tracking data, analyses it i
 
 * **The Goal for Part 1a:** To isolate a clean, streamlined dataset of core healthcare fields (cases, deaths, population) across specific countries and dates, removing junk tracking rows so external reporting tools can load the data quickly.
 * **The Goal for Part 1b:** To uncover hidden survival patterns globally. Instead of just looking at raw deaths, this stage creates an original calculation to track actual survivor volumes, groups countries into performance tiers, and ranks them internally to find out which regions handled the crisis best.
+* **The Goal for Part 1c:** To track how fast the virus accelerated day by day. It uses a look back tool to find the exact difference between today's cases and yesterday's cases, tags them with warning labels, and saves the answers into a permanent table then accessed via a view. 
 
 ### Part 1a: Core Column Selection View - see file named "View 1a"
 * **What it does:** Filters out unused data tracking fields and narrows down the table to the exact columns needed for reporting. It sorts the results by country and date.
