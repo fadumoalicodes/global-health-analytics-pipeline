@@ -78,7 +78,7 @@ select*
 from V_CountryCaseVsDeathTier
 ```
 
-### Part 1c: Daily Infection Acceleration Tracker (Stored Procedure & Cache)
+### Part 1c: Daily Infection Acceleration Tracker (Stored Procedure & Temp Tables, Views, Lag function, CASE statements, Convert data types) - see file named  "view 1c"
 * **What it does:** Uses a stored procedure to calculate the daily case changes using a look-back function, wipes old data to save a fresh copy inside a permanent staging table, and builds a permanent shortcut view for Excel to read.
 
 ```sql
