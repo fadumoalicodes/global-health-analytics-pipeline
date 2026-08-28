@@ -14,7 +14,7 @@ This project takes a huge list of global healthcare tracking data, analyses it i
 
 ### Part 1a: Core Column Selection View - see file named "View 1a"
 * **What it does:** Filters out unused data tracking fields and narrows down the table to the exact columns needed for reporting. It sorts the results by country and date.
-* **Source Code:**
+
 ```sql
 USE Project2COVID
 GO
@@ -37,7 +37,7 @@ Order by 3,4
 
 ### Part 1b: Country Survival Tier Analysis (Chained CTEs, Window Functions (ranking functions and aggregates), Case statements,  Views) - See File named "View 1b"
 * **What it does:** Calculates the highest total cases for each country, subtracts deaths to isolate actual survivors, and groups countries into performance tiers ("Excellent", "Good", or "Requires Investigation") before ranking them.
-* **Source Code:**
+
 ```sql
 USE Project2COVID
 GO
