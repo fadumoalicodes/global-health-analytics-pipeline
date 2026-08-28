@@ -78,3 +78,97 @@ select*
 from V_CountryCaseVsDeathTier
 ```
 
+### Part 1c: Daily Infection Acceleration Tracker (Stored Procedure & Cache)
+* **What it does:** Uses a stored procedure to calculate the daily case changes using a look-back function, wipes old data to save a fresh copy inside a permanent staging table, and builds a permanent shortcut view for Excel to read.
+
+```sql
+--- Part 1c  Finding the Difference in Today's New Cases and Yesterday's New Cases (daily infection spikes)
+
+
+USE Project2COVID
+GO
+
+DROP PROCEDURE IF EXISTS  DailyInfectionSpikes
+GO
+
+CREATE PROCEDURE DailyInfectionSpikes
+AS
+BEGIN
+WITH ConvertDataTypes AS(
+Select Convert(varchar(255), Location) as Location,    Convert(Date, Date) as Date, Convert(int, New_Cases) as TodayCases, Lag(Convert(int,New_Cases),1) over (partition by location order by date) as YeserdayCases
+from [Project2COVID].dbo.CovidDeaths)
+,
+DailyChangeInCases AS (
+Select ConvertDataTypes.Location, ConvertDataTypes.Date, ConvertDataTypes.TodayCases, ConvertDataTypes.YeserdayCases, Case 
+when (ConvertDataTypes.TodayCases - ConvertDataTypes.YeserdayCases) >50 then 'Investigate'
+when (ConvertDataTypes.TodayCases - ConvertDataTypes.YeserdayCases) > 10 then 'Monitor'
+when (ConvertDataTypes.TodayCases - ConvertDataTypes.YeserdayCases) > 4 then 'Standard'
+when (ConvertDataTypes.TodayCases - ConvertDataTypes.YeserdayCases) >1 then 'Good Measures in Place'
+Else  'Excellent Measures in Place'
+end as DailyCasesSpikeTiers
+from ConvertDataTypes)
+
+Select *
+from DailyChangeInCases
+END
+
+go
+
+USE Project2COVID
+GO
+
+DROP TABLE IF EXISTS #DAILYINFECTIONSPIKES
+go
+
+
+CREATE TABLE #DAILYINFECTIONSPIKES
+(Location varchar(255), Date date, TodayCases int, YesterdayCases int, DailyCasesSpikeTiers varchar(255))
+Go
+
+INSERT INTO #DAILYINFECTIONSPIKES
+EXEC DailyInfectionSpikes
+
+
+Select *
+from #DAILYINFECTIONSPIKES
+
+GO
+
+USE Project2COVID
+GO
+
+CREATE TABLE P_DailyInfectionSpikes
+(Location varchar(255), Date date, TodayCases int, YesterdayCases int, DailyCasesSpikeTiers varchar(255))
+Go
+
+
+TRUNCATE TABLE  P_DailyinfectionSpikes 
+Go
+
+
+INSERT INTO P_DailyInfectionSpikes 
+SELECT *
+FROM #DAILYINFECTIONSPIKES
+
+
+select *
+from P_DailyInfectionSpikes
+GO
+
+USE Project2COVID
+GO
+
+DROP VIEW IF EXISTS v_DailyInfectionSpikes
+GO
+
+CREATE VIEW v_DailyInfectionSpikes
+AS
+select *
+from [Project2COVID].dbo.P_DailyInfectionSpikes
+
+GO
+
+select *
+from v_DailyInfectionSpikes
+Order by 1
+```
