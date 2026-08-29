@@ -1,6 +1,14 @@
 # global-health-analytics-pipeline
 
-This project takes a huge list of global healthcare tracking data, analyses it inside SQL Server (T-SQL), and pulls results into Excel to build an interactive dashboard.
+This project uses a large global healthcare dataset with 85,171 rows of data. 
+
+Instead of just running simple searches, I built a complete system inside SQL Server (T-SQL) to clean and organize the data. The backend uses advanced queries, time-saving window formulas, and lag tools to find trends. To keep things running fast, I created automated stored procedures that run the heavy math, clear out old records, and save the final answers into either temp tables or permanent tables. I then built  database views so that Excel dashboards can read the final answers instantly without slowing down.
+
+### Technical Stack
+* Database Layer: SQL Server (T-SQL)
+* Automation Layer: Stored Procedures, Temporary Tables, and Permanent Storage Tables
+* Delivery Layer: Permanent Database Views
+* Reporting Layer: Excel Pivot Tables, Pivot Charts, and Interactive Slicers on Excel
 
 ### 💻 Tools Used
 * **Database:** SQL Server (T-SQL)
