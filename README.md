@@ -7,7 +7,7 @@ This project takes a huge list of global healthcare tracking data, analyses it i
 * **Dashboard:** Excel Pivot Tables, Pivot Charts, and Interactive Slicers
 
 
-## Part 1: Advanced Data Exploration (Covid Deaths)
+## Part 1: Population Health & Infection Acceleration Pipeline
 
 * **The Goal for Part 1a:** To isolate a clean, streamlined dataset of core healthcare fields (cases, deaths, population) across specific countries and dates, removing junk tracking rows so external reporting tools can load the data quickly.
 * **The Goal for Part 1b:** To uncover hidden survival patterns globally. Instead of just looking at raw deaths, this stage creates an original calculation to track actual survivor volumes, groups countries into performance tiers, and ranks them internally to find out which regions handled the crisis best.
@@ -174,7 +174,7 @@ select *
 from v_DailyInfectionSpikes
 Order by 1
 ```
-## Part 2: Vaccination, Testing & Country Development Exploration with SQL
+## Part 2: Development Index Tracking & Testing Volume Surge Models
 Before running the data pipelines, the analytical goals for this section were broken down into clear targets:
 * **The Goal for Part 2a:** To isolate a clean, streamlined dataset of testing, demographic, and development metrics (like HDI and life expectancy), filtering out unused fields so our downstream reporting tools can process the tables quickly.
 * **The Goal for Part 2b:** To figure out how a country's wealth and development tier relates to its positive test results. This query groups countries into three dynamic brackets based on their development index, aggregates millions of tests safely, and creates a custom percentage ratio to show the relationship between health data and country wealth.
