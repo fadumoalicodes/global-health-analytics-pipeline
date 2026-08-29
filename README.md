@@ -175,15 +175,11 @@ from v_DailyInfectionSpikes
 Order by 1
 ```
 ## Part 2: Vaccination, Testing & Country Development Exploration with SQL
-
-This phase focuses on tracking workloads, population health, and wealth metrics to analyze how a country's overall development level impacted its healthcare response.
-
-###  Part 2 Analytical Goals
-
 Before running the data pipelines, the analytical goals for this section were broken down into clear targets:
 * **The Goal for Part 2a:** To isolate a clean, streamlined dataset of testing, demographic, and development metrics (like HDI and life expectancy), filtering out unused fields so our downstream reporting tools can process the tables quickly.
-* **The Goal for Part 2b:** To analyze if wealthier, more developed nations handled virus tracking more effectively. By grouping countries into dynamic development brackets based on their Human Development Index (HDI) scores, this query calculates overall testing efficiencies and positivity trends across different economic tiers.
-* **The Goal for Part 2c:** To build an automated operational workload monitor. This pipeline uses an advanced 7-day lookback window function to identify sudden, dangerous spikes in weekly testing volumes, auto-filtering  and staging high-priority alerts inside a permanent table.
+* **The Goal for Part 2b:** To figure out how a country's wealth and development tier relates to its positive test results. This query groups countries into three dynamic brackets based on their development index, aggregates millions of tests safely, and creates a custom percentage ratio to show the relationship between health data and country wealth.
+* **The Goal for Part 2c:** To build an automated tracking tool to flag sudden spikes in the daily testing workload. This pipeline looks back exactly 7 days to see what the testing volume was on the same day last week, calculates the exact difference, and automatically saves high-priority spikes into a permanent database repository table.
+This phase focuses on tracking workloads, population health, and wealth metrics to analyze how a country's overall development level impacted its healthcare response.
 
 ---
 
@@ -200,6 +196,47 @@ GO
 CREATE VIEW V_DataSelectionForCovidVaccinationsTables
 AS
 select location, date, new_tests, total_tests, positive_rate, population, median_age, life_expectancy, human_development_index, diabetes_prevalence
-from [Project2COVID].dbo.CovidVaccinations
+from [Project2COVID].dbo.CovidVaccinations.   
 Order by 1
+```
+### Part 2b: Testing Efficiency vs. Country Development (Chained CTEs)
+* **What it does:** Groups countries into development tiers using their Human Development Index (HDI) scores, totals up millions of tests using safe memory limits, and calculates a custom percentage metric showing the relationship between positive test rates and country development.
+
+```sql
+USE Project2COVID
+GO
+
+DROP VIEW IF EXISTS V_DevelopmentIndexTrackingAgainstTesting
+GO
+
+CREATE VIEW V_DevelopmentIndexTrackingAgainstTesting
+AS 
+WITH CountriesVsDevelopmentIndex AS (
+Select Distinct Location, SUM(CONVERT(BIGint, new_tests)) over (partition by location )   as Total_Tests_Country, Max(CONVERT(float, human_development_index)) over (partition by location ) as Max_Index_Country, Case
+WHEN  Max(human_development_index) over (partition by location )> 0.8 then 'high development'
+WHEN Max(human_development_index) over (partition by location )>0.6 then 'medium development'
+ELSE 'low development'
+END  as DevelopmentTiers, positive_rate
+From  [Project2COVID].dbo.CovidVaccinations )
+,
+AverageTestRate AS (
+Select Distinct CDI.location, CDI.Total_Tests_Country, CDI.Max_Index_Country, CDI.DevelopmentTiers, Avg(CONVERT(float, CDI.positive_rate)) over (partition by location ) as Average_Positive_Rate_Country
+FROM CountriesVsDevelopmentIndex as CDI)
+,
+PositiveTestDevelopmentRatio AS (
+SELECT DISTINCT ATR.LOCATION, ATR.Total_Tests_Country, ATR.Max_Index_Country, ATR.DevelopmentTiers,   ATR.Average_Positive_Rate_Country, ((ATR.Average_Positive_Rate_Country/ATR.Max_Index_Country)*100) AS percentage_Positive_rate_Over_Dev_Index
+FROM AverageTestRate as ATR)
+
+SELECT *
+FROM PositiveTestDevelopmentRatio
+
+GO
+
+SELECT *
+FROM V_DevelopmentIndexTrackingAgainstTesting
+WHERE Max_Index_Country IS NOT NULL
+AND
+Total_Tests_Country IS NOT NULL
+ORDER BY 1
+GO
 ```
