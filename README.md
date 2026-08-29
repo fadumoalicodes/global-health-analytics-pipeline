@@ -7,7 +7,7 @@ This project takes a huge list of global healthcare tracking data, analyses it i
 * **Dashboard:** Excel Pivot Tables, Pivot Charts, and Interactive Slicers
 
 
-## Part 1: Advanced Data Exploration with SQL
+## Part 1: Advanced Data Exploration (Covid Deaths)
 
 * **The Goal for Part 1a:** To isolate a clean, streamlined dataset of core healthcare fields (cases, deaths, population) across specific countries and dates, removing junk tracking rows so external reporting tools can load the data quickly.
 * **The Goal for Part 1b:** To uncover hidden survival patterns globally. Instead of just looking at raw deaths, this stage creates an original calculation to track actual survivor volumes, groups countries into performance tiers, and ranks them internally to find out which regions handled the crisis best.
@@ -239,4 +239,64 @@ AND
 Total_Tests_Country IS NOT NULL
 ORDER BY 1
 GO
+```
+### Part 2c: Weekly Testing Workload Alerts (etl pipeline)
+* **What it does:** Automates a 7-day look-back calculation to track operational surges, dumps the output straight into a permanent data warehouse table using a truncate-and-load model, and establishes a secure virtual view layer for instant dashboard access.
+
+```sql
+USE Project2COVID
+GO
+
+DROP PROCEDURE IF EXISTS WEEK_DAY_TESTING_PROCEDURE
+GO
+
+CREATE PROCEDURE WEEK_DAY_TESTING_PROCEDURE
+AS
+BEGIN
+WITH WEEK_DAY_LAG_TABLE AS (
+SELECT CONVERT(VARCHAR(255), LOCATION) as location ,  CONVERT(DATE, DATE) as date, CONVERT(INT, new_tests) as new_tests, LAG(CONVERT(INT, new_tests), 7) over (partition by LOCATION ORDER BY Date) AS WEEK_AGO
+FROM [Project2COVID].DBO.CovidVaccinations as CV) 
+,
+WEEK_Day_Tracking AS (
+SELECT WDLT.LOCATION, WDLT.DATE, WDLT.new_tests, WDLT.WEEK_AGO, (WDLT.WEEK_AGO-WDLT.new_tests) AS IncreaseInNewTests, CASE 
+WHEN (WDLT.WEEK_AGO-WDLT.new_tests) > 6000 THEN 'HIGH PRIORITY'
+WHEN (WDLT.WEEK_AGO-WDLT.new_tests)  BETWEEN -2000 AND 2000 THEN 'MEDIUM PRIORITY'
+ELSE 'LOW PRIORITY'
+END AS PRIORITYTRACKING 
+FROM WEEK_DAY_LAG_TABLE AS WDLT)
+
+SELECT *
+FROM WEEK_Day_Tracking 
+END
+GO
+
+USE Project2COVID
+GO
+
+DROP TABLE IF EXISTS P_Week_Test_Tracker
+GO
+
+
+CREATE TABLE P_Week_Test_Tracker
+(LOCATION varchar(255), DATE date, new_tests int, WEEK_AGO int, IncreaseInNewTests int, PRIORITYTRACKING varchar(255))
+GO
+
+INSERT INTO P_Week_Test_Tracker 
+EXEC WEEK_DAY_TESTING_PROCEDURE
+go
+
+USE Project2COVID
+GO
+
+DROP VIEW IF EXISTS V_Week_Test_Tracker 
+GO
+
+CREATE VIEW V_Week_Test_Tracker 
+AS
+SELECT*
+FROM [Project2COVID].DBO.P_Week_Test_Tracker 
+GO
+
+SELECT *
+FROM V_Week_Test_Tracker
 ```
