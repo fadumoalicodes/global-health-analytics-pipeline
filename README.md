@@ -10,10 +10,6 @@ Instead of just running simple searches, I built a complete system inside SQL Se
 * Delivery Layer: Permanent Database Views
 * Reporting Layer: Excel Pivot Tables, Pivot Charts, and Interactive Slicers on Excel
 
-### 💻 Tools Used
-* **Database:** SQL Server (T-SQL)
-* **Dashboard:** Excel Pivot Tables, Pivot Charts, and Interactive Slicers
-
 
 ## Part 1: Population Health & Infection Acceleration Pipeline
 
