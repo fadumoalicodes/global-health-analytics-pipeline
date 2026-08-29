@@ -304,3 +304,76 @@ GO
 SELECT *
 FROM V_Week_Test_Tracker
 ```
+## Part 3: Deep Data Analysis (Nested Subqueries)
+
+This final section brings all of our independent tracking numbers together into a single global reporting tool.
+
+### Part 3a: Multi-Layer Nested Subquery Storage Pipeline
+* **What it does:** Runs an advanced 4-layer deep nested subquery procedure to link our country metrics together. It calculates testing numbers against a 7-day look-back infection trend, assigns active efficiency labels, and saves the data straight down into a clean permanent table for reporting.
+
+```sql
+--- stored procedure
+USE Project2COVID
+GO
+
+DROP PROCEDURE IF EXISTS MULTIJOINWORKINGCODE
+GO
+
+CREATE PROCEDURE MULTIJOINWORKINGCODE
+AS
+BEGIN
+SELECT final.Location, final.DATE, final.DevelopmentTiers, final.Max_Index_Country, final.CountryCovidDeathTiers, final.TodayCases, final.Week_Ago_Case,  final.IncreaseInNewTests,  (final.TodayCases-final.Week_Ago_Case)  as IncreaseInNewCases, CASE WHEN (final.IncreaseInNewTests - (final.TodayCases-final.Week_Ago_Case) ) >500 THEN 'Testing is Moderate' WHEN (final.IncreaseInNewTests - (final.TodayCases-final.Week_Ago_Case)) > 200 THEN 'Effective' ELSE 'Not Effective' END AS TESTINGEFFECTIVNESS
+FROM 
+(SELECT DIS.Date, SECONDJOIN.Location, SECONDJOIN.DevelopmentTiers, SECONDJOIN.Max_Index_Country, SECONDJOIN.CountryCovidDeathTiers, SECONDJOIN.IncreaseInNewTests, DIS.TodayCases, lag(DIS.TodayCases, 7)  over (partition by SECONDJOIN.location Order by date) as Week_Ago_Case
+FROM
+(SELECT FIRSTJOINDEATHSANDINDEX.Location, FIRSTJOINDEATHSANDINDEX.DevelopmentTiers, FIRSTJOINDEATHSANDINDEX.Max_Index_Country, FIRSTJOINDEATHSANDINDEX.MaxDeaths, FIRSTJOINDEATHSANDINDEX.CountryCovidDeathTiers, VP3CTEST.IncreaseInNewTests 
+FROM 
+(SELECT  DITTABLE.Location,  DITTABLE.DevelopmentTiers, DITTABLE.Max_Index_Country, CCVDT.MaxDeaths, CCVDT.CountryCovidDeathTiers
+FROM
+(SELECT  DIT.Location, DIT.DevelopmentTiers, DIT.Max_Index_Country
+FROM (
+SELECT Location, DevelopmentTiers, Max_Index_Country
+FROM  dbo.V_DevelopmentIndexTrackingAgainstTesting) as DIT) as  DITTABLE
+INNER JOIN [Project2COVID].dbo.V_CountryCaseVsDeathTier as CCVDT
+on DITTABLE.Location = CCVDT.Location) AS FIRSTJOINDEATHSANDINDEX
+inner join [Project2COVID].dbo.V_P3C_Week_Test_Tracker  as VP3CTEST
+on FIRSTJOINDEATHSANDINDEX.Location = VP3CTEST.Location ) as SECONDJOIN
+INNER JOIN  [Project2COVID].dbo.P_dailyinfectionspikes as DIS
+on SECONDJOIN.location = DIS.Location ) AS final
+END
+
+EXEC MULTIJOINWORKINGCODE
+GO
+
+--creating permenant table
+
+USE Project2COVID
+GO
+
+DROP TABLE IF EXISTS P_GlobalHealthReporting
+GO
+
+CREATE TABLE P_GlobalHealthReporting
+(Location varchar(255), Date Date, DevelopmentTiers varchar(255), Max_Index_Country float, CountryCovidDeathTiers varchar(255), Today_Cases int, Week_Ago_Case int,  IncreaseInNewTests int,  IncreaseInNewCases int, TESTINGEFFECTIVNESS varchar(255))
+GO
+
+INSERT INTO P_GlobalHealthReporting
+EXEC MULTIJOINWORKINGCODE
+GO
+
+-- Creating a View
+USE Project2COVID
+GO
+
+DROP VIEW IF EXISTS V_GlobalHealthReporting
+GO
+
+CREATE VIEW V_GlobalHealthReporting
+AS
+SELECT *
+FROM P_GlobalHealthReporting
+go
+
+SELECT *
+FROM V_GlobalHealthReporting
+```
