@@ -167,9 +167,39 @@ AS
 select *
 from [Project2COVID].dbo.P_DailyInfectionSpikes
 
+
 GO
 
 select *
 from v_DailyInfectionSpikes
+Order by 1
+```
+## Part 2: Vaccination, Testing & Country Development Exploration with SQL
+
+This phase focuses on tracking workloads, population health, and wealth metrics to analyze how a country's overall development level impacted its healthcare response.
+
+###  Part 2 Analytical Goals
+
+Before running the data pipelines, the analytical goals for this section were broken down into clear targets:
+* **The Goal for Part 2a:** To isolate a clean, streamlined dataset of testing, demographic, and development metrics (like HDI and life expectancy), filtering out unused fields so our downstream reporting tools can process the tables quickly.
+* **The Goal for Part 2b:** To analyze if wealthier, more developed nations handled virus tracking more effectively. By grouping countries into dynamic development brackets based on their Human Development Index (HDI) scores, this query calculates overall testing efficiencies and positivity trends across different economic tiers.
+* **The Goal for Part 2c:** To build an automated operational workload monitor. This pipeline uses an advanced 7-day lookback window function to identify sudden, dangerous spikes in weekly testing volumes, auto-filtering  and staging high-priority alerts inside a permanent table.
+
+---
+
+### Part 2a: Core Vaccination & Development Column Selection View  - See File named "View 2a"
+* **What it does:** Filters out unused data tracking fields and isolates the core columns needed to analyze testing volume alongside country development and health metrics (like human development index, life expectancy, and median age).
+
+```sql
+USE Project2COVID
+GO
+
+DROP VIEW IF EXISTS V_DataSelectionForCovidVaccinationsTables
+GO
+
+CREATE VIEW V_DataSelectionForCovidVaccinationsTables
+AS
+select location, date, new_tests, total_tests, positive_rate, population, median_age, life_expectancy, human_development_index, diabetes_prevalence
+from [Project2COVID].dbo.CovidVaccinations
 Order by 1
 ```
