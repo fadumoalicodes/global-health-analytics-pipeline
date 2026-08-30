@@ -349,3 +349,23 @@ GO
 
 
 ```
+## Part 3b: (V_P3C_Week_Test_Tracker)
+* **What it does:** Creates a supportive background view that takes the raw weekly testing rows and groups them by country. It calculates the complete sum of all tests run by each nation (`TotalTests`), acting as a clean numbers engine that feeds directly into our Part 3a master query.
+
+```sql
+USE Project2COVID
+GO
+
+DROP VIEW IF EXISTS V_P3C_Week_Test_Tracker
+GO
+
+CREATE VIEW V_P3C_Week_Test_Tracker
+AS
+SELECT Location, SUM(new_tests) AS TotalTests
+FROM dbo.P_Week_Test_Tracker
+GROUP BY Location 
+GO
+
+SELECT * FROM V_P3C_Week_Test_Tracker
+GO
+```
