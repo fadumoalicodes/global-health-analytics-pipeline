@@ -304,76 +304,48 @@ GO
 SELECT *
 FROM V_Week_Test_Tracker
 ```
-## Part 3: Deep Data Analysis (Nested Subqueries)
+## Part 3: Global Reporting
 
 This final section brings all of our independent tracking numbers together into a single global reporting tool.
+### Part 3a: Combined Country Summary Pipeline
+* **What it does:** Uses a clean, step-by-step query method called a CTE to bring all our separate tables together. It adds up the total case logs and testing numbers for each country, labels them by their testing strategy, and packs everything into a neat summary list with exactly one row per country.
 
-### Part 3a: Multi-Layer Nested Subquery Storage Pipeline
-* **What it does:** Runs an advanced 4-layer deep nested subquery procedure to link our country metrics together. It calculates testing numbers against a 7-day look-back infection trend, assigns active efficiency labels, and saves the data straight down into a clean permanent table for reporting.
-
-```sql
---- stored procedure
-USE Project2COVID
+```sql DROP VIEW IF EXISTS V_GlobalHealthReporting
 GO
-
-DROP PROCEDURE IF EXISTS MULTIJOINWORKINGCODE
-GO
-
-CREATE PROCEDURE MULTIJOINWORKINGCODE
-AS
-BEGIN
-SELECT final.Location, final.DATE, final.DevelopmentTiers, final.Max_Index_Country, final.CountryCovidDeathTiers, final.TodayCases, final.Week_Ago_Case,  final.IncreaseInNewTests,  (final.TodayCases-final.Week_Ago_Case)  as IncreaseInNewCases, CASE WHEN (final.IncreaseInNewTests - (final.TodayCases-final.Week_Ago_Case) ) >500 THEN 'Testing is Moderate' WHEN (final.IncreaseInNewTests - (final.TodayCases-final.Week_Ago_Case)) > 200 THEN 'Effective' ELSE 'Not Effective' END AS TESTINGEFFECTIVNESS
-FROM 
-(SELECT DIS.Date, SECONDJOIN.Location, SECONDJOIN.DevelopmentTiers, SECONDJOIN.Max_Index_Country, SECONDJOIN.CountryCovidDeathTiers, SECONDJOIN.IncreaseInNewTests, DIS.TodayCases, lag(DIS.TodayCases, 7)  over (partition by SECONDJOIN.location Order by date) as Week_Ago_Case
-FROM
-(SELECT FIRSTJOINDEATHSANDINDEX.Location, FIRSTJOINDEATHSANDINDEX.DevelopmentTiers, FIRSTJOINDEATHSANDINDEX.Max_Index_Country, FIRSTJOINDEATHSANDINDEX.MaxDeaths, FIRSTJOINDEATHSANDINDEX.CountryCovidDeathTiers, VP3CTEST.IncreaseInNewTests 
-FROM 
-(SELECT  DITTABLE.Location,  DITTABLE.DevelopmentTiers, DITTABLE.Max_Index_Country, CCVDT.MaxDeaths, CCVDT.CountryCovidDeathTiers
-FROM
-(SELECT  DIT.Location, DIT.DevelopmentTiers, DIT.Max_Index_Country
-FROM (
-SELECT Location, DevelopmentTiers, Max_Index_Country
-FROM  dbo.V_DevelopmentIndexTrackingAgainstTesting) as DIT) as  DITTABLE
-INNER JOIN [Project2COVID].dbo.V_CountryCaseVsDeathTier as CCVDT
-on DITTABLE.Location = CCVDT.Location) AS FIRSTJOINDEATHSANDINDEX
-inner join [Project2COVID].dbo.V_P3C_Week_Test_Tracker  as VP3CTEST
-on FIRSTJOINDEATHSANDINDEX.Location = VP3CTEST.Location ) as SECONDJOIN
-INNER JOIN  [Project2COVID].dbo.P_dailyinfectionspikes as DIS
-on SECONDJOIN.location = DIS.Location ) AS final
-END
-
-EXEC MULTIJOINWORKINGCODE
-GO
-
---creating permenant table
-
-USE Project2COVID
-GO
-
-DROP TABLE IF EXISTS P_GlobalHealthReporting
-GO
-
-CREATE TABLE P_GlobalHealthReporting
-(Location varchar(255), Date Date, DevelopmentTiers varchar(255), Max_Index_Country float, CountryCovidDeathTiers varchar(255), Today_Cases int, Week_Ago_Case int,  IncreaseInNewTests int,  IncreaseInNewCases int, TESTINGEFFECTIVNESS varchar(255))
-GO
-
-INSERT INTO P_GlobalHealthReporting
-EXEC MULTIJOINWORKINGCODE
-GO
-
--- Creating a View
-USE Project2COVID
-GO
-
-DROP VIEW IF EXISTS V_GlobalHealthReporting
-GO
-
 CREATE VIEW V_GlobalHealthReporting
 AS
-SELECT *
-FROM P_GlobalHealthReporting
-go
+WITH DIT_CTE AS (
+SELECT Location, DevelopmentTiers, Max_Index_Country
+FROM dbo.V_DevelopmentIndexTrackingAgainstTesting
+),
+FIRSTJOIN_CTE AS (
+SELECT DIT.Location, DIT.DevelopmentTiers, DIT.Max_Index_Country, CCVDT.CountryCovidDeathTiers
+FROM DIT_CTE AS DIT
+INNER JOIN [Project2COVID].dbo.V_CountryCaseVsDeathTier AS CCVDT ON DIT.Location = CCVDT.Location
+),
+SECONDJOIN_CTE AS (
+SELECT FJ.Location, FJ.DevelopmentTiers, FJ.Max_Index_Country, FJ.CountryCovidDeathTiers, VP3CTEST.TotalTests
+FROM FIRSTJOIN_CTE AS FJ
+INNER JOIN [Project2COVID].dbo.V_P3C_Week_Test_Tracker AS VP3CTEST ON FJ.Location = VP3CTEST.Location
+),
+DAILY_INF_CTE AS (
+SELECT Distinct Location,  SUM(TodayCases) OVER (Partition by Location) As TotalCases
+FROM [Project2COVID].dbo.P_dailyinfectionspikes
+) 
+SELECT  DIC.Location,  SJ.DevelopmentTiers, SJ.Max_Index_Country, SJ.CountryCovidDeathTiers, SJ.TotalTests,  DIC.TotalCases, CASE 
+WHEN DIC.TotalCases = 0 THEN 'Defensive Testing - No Cases Found'
+WHEN (SJ.TotalTests / DIC.TotalCases) > 50 THEN 'High Testing (Aggressive Screening)'
+WHEN (SJ.TotalTests / DIC.TotalCases) > 15 THEN 'Moderate Testing (Adequate Coverage)'
+ELSE 'Critical Testing Shortage'
+END AS TestingCoverage
+From DAILY_INF_CTE AS DIC
+INNER JOIN SECONDJOIN_CTE AS SJ ON DIC.Location = SJ.Location
+GO
 
-SELECT *
+SELECT Location,  DevelopmentTiers, Max_Index_Country, CountryCovidDeathTiers, ISNULL(TotalTests,0) AS TOTALTESTS, ISNULL(TotalCases,0) AS TOTALCASES,  TestingCoverage, DENSE_RANK() OVER (Partition by TestingCoverage  Order By (CONVERT(DEC(18,2), ISNULL(TotalTests, 0)/NULLIF(TotalCases,0)))) AS RankOfTestCoverage
 FROM V_GlobalHealthReporting
+Order By TestingCoverage, RankOfTestCoverage
+GO
+
+
 ```
