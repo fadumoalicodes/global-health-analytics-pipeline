@@ -366,6 +366,52 @@ FROM dbo.P_Week_Test_Tracker
 GROUP BY Location 
 GO
 
-SELECT * FROM V_P3C_Week_Test_Tracker
+SELECT * FROM V_P3C_Week_Test_Tracker. 
 GO
 ```
+## Part 4: Executive Performance Scorecard Layer (Excel Dashboard Metrics)
+
+This section details the top executive summary bar built inside Microsoft Excel. These scorecard boxes read the final country dataset automatically to display high-level operational metrics to any health director looking at the dashboard canvas.
+
+### Part 4a: KPI 1 - Total Countries Monitored
+* **The Goal:** Counts every unique country name in the dataset to show the complete geographic scope of the reporting framework.
+* **Excel Dashboard Formula:**
+  ```excel
+  =COUNTA(V_GlobalHealthReporting!A2:A219)
+  ```
+
+---
+
+### Part 4b: KPI 2 - Global Test Volume
+* **The Goal:** Adds up every single viral screening test successfully deployed worldwide across all monitored countries to show complete diagnostic workloads.
+* **Excel Dashboard Formula:**
+  ```excel
+  =SUM(V_GlobalHealthReporting!E2:E219)
+  ```
+
+---
+
+### Part 4c: KPI 3 - Screening Failure Rate %
+* **The Goal:** Shows the exact percentage share of countries worldwide that are completely trapped in a severe testing resource shortage.
+* **Excel Dashboard Formula:**
+  ```excel
+  =(COUNTIF(V_GlobalHealthReporting!G2:G219, "Critical Testing Shortage")/(COUNTA(V_GlobalHealthReporting!A2:A219)))*100
+  ```
+
+---
+
+### Part 4d: Top 3 Screening Leaders List
+* **The Goal:** Automatically searches the data to pull and display the real names of the top three countries leading the world in screening efficiency.
+* **Excel Leaderboard Formulas:**
+  * *To display the #1 Leader:*
+    ```excel
+    =XLOOKUP(1,V_GlobalHealthReporting!H182:H197,V_GlobalHealthReporting!A182:A197)
+    ```
+  * *To display the #2 Runner-Up:*
+    ```excel
+ =XLOOKUP(2, V_GlobalHealthReporting!H182:H197, V_GlobalHealthReporting!A182:A197)      
+    ```
+  * *To display the #3 Third Place:*
+    ```excel         
+    =XLOOKUP(3, 'Master Data'!H:H, 'Master Data'!A:A, "No Data Found")
+    ```
