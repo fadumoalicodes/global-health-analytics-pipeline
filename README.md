@@ -415,4 +415,4 @@ This section details the top executive summary bar built inside Microsoft Excel.
     ```excel
      =XLOOKUP(3, V_GlobalHealthReporting!H182:H197, V_GlobalHealthReporting!A182:A197)
     ```
-    182:H197,V_GlobalHealthReporting!A182:A197)      
+ 
