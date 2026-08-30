@@ -409,9 +409,10 @@ This section details the top executive summary bar built inside Microsoft Excel.
     ```
   * *To display the #2 Runner-Up:*
     ```excel
- =XLOOKUP(2, V_GlobalHealthReporting!H182:H197, V_GlobalHealthReporting!A182:A197)      
+     =XLOOKUP(2, V_GlobalHealthReporting!H182:H197, V_GlobalHealthReporting!A182:A197)      
     ```
   * *To display the #3 Third Place:*
-    ```excel         
+    ``` excel
+    =XLOOKUP(3,V_GlobalHealthReporting!H182:H197,V_GlobalHealthReporting!A182:A197)      
     =XLOOKUP(3, 'Master Data'!H:H, 'Master Data'!A:A, "No Data Found")
     ```
