@@ -1,0 +1,220 @@
+﻿Location,DevelopmentTiers,Max_Index_Country,CountryCovidDeathTiers,TOTALTESTS,TOTALCASES,TestingCoverage,RankOfTestCoverage
+Anguilla,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Aruba,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Bermuda,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Cayman Islands,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Curacao,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Faeroe Islands,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Falkland Islands,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Gibraltar,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Greenland,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Guernsey,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Hong Kong,high development,0.949,Requires Investigation,0,0,Critical Testing Shortage,1
+Isle of Man,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Jersey,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Macao,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Montserrat,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Nauru,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Northern Cyprus,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Saint Helena,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Tonga,medium development,0.725,Requires Investigation,0,0,Critical Testing Shortage,1
+Turks and Caicos Islands,low development,NULL,Requires Investigation,0,0,Critical Testing Shortage,1
+Tunisia,medium development,0.74,Excellent,130677,309119,Critical Testing Shortage,2
+Uzbekistan,medium development,0.72,Excellent,0,90808,Critical Testing Shortage,2
+Vanuatu,medium development,0.609,Good,0,4,Critical Testing Shortage,2
+Vatican,low development,NULL,Requires Investigation,0,27,Critical Testing Shortage,2
+Venezuela,medium development,0.711,Excellent,0,197683,Critical Testing Shortage,2
+World,medium development,0.737,Excellent,0,150575698,Critical Testing Shortage,2
+Yemen,low development,0.47,Good,0,6317,Critical Testing Shortage,2
+Solomon Islands,low development,0.567,Requires Investigation,0,20,Critical Testing Shortage,2
+Somalia,low development,NULL,Excellent,0,13915,Critical Testing Shortage,2
+South America,low development,NULL,Excellent,0,24878216,Critical Testing Shortage,2
+Sudan,low development,0.51,Excellent,0,33944,Critical Testing Shortage,2
+Suriname,medium development,0.738,Excellent,0,10363,Critical Testing Shortage,2
+Spain,high development,0.904,Excellent,0,3524077,Critical Testing Shortage,2
+Syria,low development,0.567,Excellent,0,22733,Critical Testing Shortage,2
+Tajikistan,medium development,0.668,Excellent,0,13308,Critical Testing Shortage,2
+Tanzania,low development,0.529,Excellent,0,509,Critical Testing Shortage,2
+Timor,medium development,0.606,Excellent,0,2276,Critical Testing Shortage,2
+Saint Kitts and Nevis,medium development,0.779,Requires Investigation,0,44,Critical Testing Shortage,2
+Saint Lucia,medium development,0.759,Excellent,0,4552,Critical Testing Shortage,2
+Saint Vincent and the Grenadines,medium development,0.738,Excellent,0,1864,Critical Testing Shortage,2
+Samoa,medium development,0.715,Requires Investigation,0,3,Critical Testing Shortage,2
+San Marino,low development,NULL,Excellent,0,5066,Critical Testing Shortage,2
+Sao Tome and Principe,medium development,0.625,Excellent,0,2302,Critical Testing Shortage,2
+Seychelles,medium development,0.796,Excellent,0,5873,Critical Testing Shortage,2
+Sierra Leone,low development,0.452,Excellent,0,4054,Critical Testing Shortage,2
+Singapore,high development,0.938,Excellent,0,61145,Critical Testing Shortage,2
+North America,low development,NULL,Excellent,0,37529487,Critical Testing Shortage,2
+Oceania,low development,NULL,Excellent,0,43570,Critical Testing Shortage,2
+Papua New Guinea,low development,0.555,Excellent,0,10997,Critical Testing Shortage,2
+Montenegro,high development,0.829,Excellent,0,97389,Critical Testing Shortage,2
+Netherlands,high development,0.944,Excellent,0,1522973,Critical Testing Shortage,2
+Nicaragua,medium development,0.66,Excellent,0,6898,Critical Testing Shortage,2
+Niger,low development,0.394,Excellent,0,5228,Critical Testing Shortage,2
+Micronesia (country),medium development,0.62,Requires Investigation,0,1,Critical Testing Shortage,2
+Moldova,medium development,0.75,Excellent,0,250837,Critical Testing Shortage,2
+Monaco,low development,NULL,Excellent,0,2454,Critical Testing Shortage,2
+Lebanon,medium development,0.744,Excellent,0,526578,Critical Testing Shortage,2
+Lesotho,low development,0.527,Excellent,0,10731,Critical Testing Shortage,2
+Liberia,low development,0.48,Excellent,0,2099,Critical Testing Shortage,2
+Mali,low development,0.434,Excellent,0,13858,Critical Testing Shortage,2
+Marshall Islands,medium development,0.704,Requires Investigation,0,4,Critical Testing Shortage,2
+Mauritius,high development,0.804,Excellent,0,1209,Critical Testing Shortage,2
+Kosovo,low development,NULL,Excellent,0,103638,Critical Testing Shortage,2
+Kyrgyzstan,medium development,0.697,Excellent,0,95275,Critical Testing Shortage,2
+Laos,medium development,0.613,Requires Investigation,0,757,Critical Testing Shortage,2
+International,low development,NULL,Excellent,0,721,Critical Testing Shortage,2
+Guinea,low development,0.477,Excellent,0,22215,Critical Testing Shortage,2
+Guinea-Bissau,low development,0.48,Excellent,0,3734,Critical Testing Shortage,2
+Guyana,medium development,0.682,Excellent,0,13283,Critical Testing Shortage,2
+Haiti,low development,0.51,Excellent,0,13056,Critical Testing Shortage,2
+Honduras,medium development,0.634,Excellent,0,212333,Critical Testing Shortage,2
+Grenada,medium development,0.779,Excellent,0,160,Critical Testing Shortage,2
+Gabon,medium development,0.703,Excellent,0,23075,Critical Testing Shortage,2
+Georgia,high development,0.812,Excellent,254704,310310,Critical Testing Shortage,2
+Germany,high development,0.947,Excellent,0,3405365,Critical Testing Shortage,2
+Eswatini,medium development,0.611,Excellent,0,18458,Critical Testing Shortage,2
+Europe,low development,NULL,Excellent,0,44863478,Critical Testing Shortage,2
+European Union,low development,NULL,Excellent,0,30771214,Critical Testing Shortage,2
+Djibouti,low development,0.524,Excellent,0,11100,Critical Testing Shortage,2
+Dominica,medium development,0.742,Requires Investigation,0,174,Critical Testing Shortage,2
+Egypt,medium development,0.707,Excellent,0,227552,Critical Testing Shortage,2
+Equatorial Guinea,low development,0.592,Excellent,0,7694,Critical Testing Shortage,2
+Eritrea,low development,0.459,Excellent,0,3671,Critical Testing Shortage,2
+China,medium development,0.761,Excellent,0,101946,Critical Testing Shortage,2
+Central African Republic,low development,0.397,Excellent,0,6411,Critical Testing Shortage,2
+Chad,low development,0.398,Excellent,0,4817,Critical Testing Shortage,2
+Comoros,low development,0.554,Excellent,0,3834,Critical Testing Shortage,2
+Congo,low development,0.574,Excellent,0,10678,Critical Testing Shortage,2
+Belize,medium development,0.716,Excellent,0,12668,Critical Testing Shortage,2
+Benin,low development,0.545,Excellent,0,7821,Critical Testing Shortage,2
+Botswana,medium development,0.735,Excellent,0,46934,Critical Testing Shortage,2
+Brazil,medium development,0.765,Excellent,0,14659011,Critical Testing Shortage,2
+Brunei,high development,0.838,Excellent,0,224,Critical Testing Shortage,2
+Burkina Faso,low development,0.452,Excellent,0,13310,Critical Testing Shortage,2
+Burundi,low development,0.433,Excellent,0,3995,Critical Testing Shortage,2
+Cambodia,low development,0.594,Excellent,0,13402,Critical Testing Shortage,2
+Cameroon,low development,0.563,Excellent,0,72250,Critical Testing Shortage,2
+Asia,low development,NULL,Excellent,0,38702527,Critical Testing Shortage,2
+Azerbaijan,medium development,0.756,Excellent,22950,319109,Critical Testing Shortage,2
+Bahamas,high development,0.814,Excellent,0,10453,Critical Testing Shortage,2
+Barbados,high development,0.814,Excellent,0,3855,Critical Testing Shortage,2
+Antigua and Barbuda,medium development,0.778,Excellent,0,1232,Critical Testing Shortage,2
+Afghanistan,low development,0.511,Excellent,0,59745,Critical Testing Shortage,2
+Africa,low development,NULL,Excellent,0,4557699,Critical Testing Shortage,2
+Algeria,medium development,0.748,Excellent,0,122108,Critical Testing Shortage,2
+Andorra,high development,0.868,Excellent,0,13232,Critical Testing Shortage,2
+Angola,low development,0.581,Excellent,0,26652,Critical Testing Shortage,2
+Belarus,high development,0.823,Excellent,513058,358738,Critical Testing Shortage,3
+Mauritania,low development,0.546,Excellent,23429,18402,Critical Testing Shortage,3
+Malawi,low development,0.483,Excellent,57004,34078,Critical Testing Shortage,3
+Peru,medium development,0.777,Excellent,3195388,1799445,Critical Testing Shortage,3
+Oman,high development,0.813,Excellent,200640,193253,Critical Testing Shortage,3
+Mexico,medium development,0.779,Excellent,6178248,2344755,Critical Testing Shortage,4
+Madagascar,low development,0.528,Excellent,75907,37014,Critical Testing Shortage,4
+Iran,medium development,0.783,Excellent,5853262,2499077,Critical Testing Shortage,4
+Argentina,high development,0.845,Excellent,8563665,2977363,Critical Testing Shortage,4
+Armenia,medium development,0.776,Excellent,460180,216064,Critical Testing Shortage,4
+Bolivia,medium development,0.718,Excellent,1079159,303732,Critical Testing Shortage,5
+Bosnia and Herzegovina,medium development,0.78,Excellent,613431,198461,Critical Testing Shortage,5
+Costa Rica,high development,0.81,Excellent,798469,250991,Critical Testing Shortage,5
+Ecuador,medium development,0.759,Excellent,1197554,381862,Critical Testing Shortage,5
+Jamaica,medium development,0.734,Excellent,150952,45578,Critical Testing Shortage,5
+Kenya,medium development,0.601,Excellent,573729,159318,Critical Testing Shortage,5
+Paraguay,medium development,0.728,Excellent,1078106,279077,Critical Testing Shortage,5
+Ukraine,medium development,0.779,Excellent,6514739,2124070,Critical Testing Shortage,5
+South Sudan,low development,0.433,Excellent,51373,10583,Critical Testing Shortage,6
+Poland,high development,0.88,Excellent,13609387,2792142,Critical Testing Shortage,6
+Palestine,medium development,0.708,Excellent,1368355,296462,Critical Testing Shortage,6
+North Macedonia,medium development,0.774,Excellent,714889,152367,Critical Testing Shortage,6
+Slovenia,high development,0.917,Excellent,1174592,240292,Critical Testing Shortage,6
+Indonesia,medium development,0.718,Excellent,7199995,1668368,Critical Testing Shortage,6
+Libya,medium development,0.724,Excellent,771033,177508,Critical Testing Shortage,6
+Nigeria,low development,0.539,Excellent,702055,165110,Critical Testing Shortage,6
+Dominican Republic,medium development,0.756,Excellent,1183657,266561,Critical Testing Shortage,6
+Croatia,high development,0.851,Excellent,1550243,332183,Critical Testing Shortage,6
+Democratic Republic of Congo,low development,0.48,Excellent,132448,29853,Critical Testing Shortage,6
+Bulgaria,high development,0.816,Excellent,2020240,404380,Critical Testing Shortage,6
+Albania,medium development,0.795,Excellent,610865,131085,Critical Testing Shortage,6
+Cape Verde,medium development,0.665,Excellent,125024,23882,Critical Testing Shortage,7
+Colombia,medium development,0.767,Excellent,14307709,2859724,Critical Testing Shortage,7
+Guatemala,medium development,0.663,Excellent,1251067,227671,Critical Testing Shortage,7
+Serbia,high development,0.806,Excellent,3814507,689557,Critical Testing Shortage,7
+Romania,high development,0.828,Excellent,5589481,1055265,Critical Testing Shortage,7
+Panama,high development,0.815,Excellent,2371759,364576,Critical Testing Shortage,8
+South Africa,medium development,0.709,Excellent,10496234,1581210,Critical Testing Shortage,8
+Uruguay,high development,0.817,Excellent,1235341,198428,Critical Testing Shortage,8
+Hungary,high development,0.854,Excellent,4922704,779348,Critical Testing Shortage,8
+Jordan,medium development,0.729,Excellent,4808039,711373,Critical Testing Shortage,8
+Iraq,medium development,0.674,Excellent,6855019,1065199,Critical Testing Shortage,8
+Kuwait,high development,0.806,Excellent,2080415,273991,Critical Testing Shortage,9
+Namibia,medium development,0.646,Excellent,371679,48351,Critical Testing Shortage,9
+Nepal,medium development,0.602,Excellent,2410604,323187,Critical Testing Shortage,9
+Mozambique,low development,0.456,Excellent,510150,69917,Critical Testing Shortage,9
+Bangladesh,medium development,0.632,Excellent,5444255,759132,Critical Testing Shortage,9
+Sweden,high development,0.945,Excellent,8299676,973604,Critical Testing Shortage,10
+Qatar,high development,0.848,Excellent,1848471,205652,Critical Testing Shortage,10
+Switzerland,high development,0.955,Excellent,6470107,659974,Critical Testing Shortage,11
+Ethiopia,low development,0.485,Excellent,2573734,257442,Critical Testing Shortage,11
+Ghana,medium development,0.611,Excellent,877316,92562,Critical Testing Shortage,11
+Gambia,low development,0.496,Excellent,59489,5898,Critical Testing Shortage,12
+Morocco,medium development,0.686,Excellent,5592551,511249,Critical Testing Shortage,12
+Czechia,high development,0.9,Excellent,17223085,1630758,Critical Testing Shortage,12
+Estonia,high development,0.892,Excellent,1283666,122019,Critical Testing Shortage,12
+Chile,high development,0.851,Excellent,12911467,1198245,Critical Testing Shortage,12
+Philippines,medium development,0.718,Excellent,11002514,1037460,Critical Testing Shortage,12
+Turkey,high development,0.82,Excellent,46956422,3997366,Critical Testing Shortage,13
+Trinidad and Tobago,medium development,0.796,Excellent,124490,10824,Critical Testing Shortage,13
+Lithuania,high development,0.882,Excellent,2797229,247269,Critical Testing Shortage,13
+Cote d'Ivoire,low development,0.538,Excellent,567263,46036,Critical Testing Shortage,14
+El Salvador,medium development,0.673,Excellent,892564,69198,Critical Testing Shortage,14
+Belgium,high development,0.931,Excellent,12474082,990229,Critical Testing Shortage,14
+United States,high development,0.926,Excellent,413502739,32346970,Critical Testing Shortage,14
+Portugal,high development,0.864,Excellent,10462308,836493,Critical Testing Shortage,14
+Pakistan,low development,0.557,Excellent,10534185,825519,Critical Testing Shortage,14
+Senegal,low development,0.512,Excellent,489922,40344,Critical Testing Shortage,14
+Zimbabwe,low development,0.571,Excellent,479654,38257,Critical Testing Shortage,14
+France,high development,0.901,Excellent,75271850,5677835,Critical Testing Shortage,15
+Liechtenstein,high development,0.919,Excellent,39847,2926,Critical Testing Shortage,15
+India,medium development,0.645,Excellent,281018979,19164969,Critical Testing Shortage,16
+Italy,high development,0.892,Excellent,58236657,4022653,Critical Testing Shortage,16
+Zambia,low development,0.584,Excellent,1347849,91586,Critical Testing Shortage,16
+Finland,high development,0.938,Excellent,4471324,86808,High Testing (Aggressive Screening),1
+Iceland,high development,0.949,Excellent,348819,6472,High Testing (Aggressive Screening),2
+South Korea,high development,0.916,Excellent,7494292,122633,High Testing (Aggressive Screening),3
+Thailand,medium development,0.777,Excellent,4351770,65149,High Testing (Aggressive Screening),4
+Mongolia,medium development,0.737,Excellent,2461873,37285,High Testing (Aggressive Screening),4
+Cyprus,high development,0.887,Excellent,5136808,65233,High Testing (Aggressive Screening),5
+United Arab Emirates,high development,0.89,Excellent,43310259,520236,High Testing (Aggressive Screening),6
+Slovakia,high development,0.86,Excellent,34035158,382211,High Testing (Aggressive Screening),7
+Denmark,high development,0.94,Excellent,24322447,251249,High Testing (Aggressive Screening),8
+Vietnam,medium development,0.704,Excellent,333691,2928,High Testing (Aggressive Screening),9
+Taiwan,low development,NULL,Excellent,207488,1127,High Testing (Aggressive Screening),10
+Cuba,medium development,0.783,Excellent,35608501,106707,High Testing (Aggressive Screening),11
+Australia,high development,0.944,Excellent,10435656,29811,High Testing (Aggressive Screening),12
+Fiji,medium development,0.743,Excellent,42632,117,High Testing (Aggressive Screening),13
+Bhutan,medium development,0.654,Excellent,631823,1074,High Testing (Aggressive Screening),14
+New Zealand,high development,0.931,Excellent,1672964,2613,High Testing (Aggressive Screening),15
+Myanmar,low development,0.583,Excellent,2407793,142817,Moderate Testing (Adequate Coverage),1
+Uganda,low development,0.544,Excellent,677401,41866,Moderate Testing (Adequate Coverage),1
+Ireland,high development,0.955,Excellent,4466107,248870,Moderate Testing (Adequate Coverage),2
+Japan,high development,0.919,Excellent,11154934,593262,Moderate Testing (Adequate Coverage),3
+Latvia,high development,0.866,Excellent,2245899,118558,Moderate Testing (Adequate Coverage),3
+Bahrain,high development,0.852,Excellent,3297038,176934,Moderate Testing (Adequate Coverage),3
+Israel,high development,0.919,Excellent,16101570,838481,Moderate Testing (Adequate Coverage),4
+Greece,high development,0.888,Excellent,7630644,345033,Moderate Testing (Adequate Coverage),5
+Malaysia,high development,0.81,Excellent,9179078,408713,Moderate Testing (Adequate Coverage),5
+Togo,low development,0.515,Excellent,309090,12967,Moderate Testing (Adequate Coverage),6
+Russia,high development,0.824,Excellent,115684824,4750755,Moderate Testing (Adequate Coverage),7
+Maldives,medium development,0.74,Excellent,718648,29835,Moderate Testing (Adequate Coverage),7
+Canada,high development,0.929,Excellent,31323043,1228367,Moderate Testing (Adequate Coverage),8
+Sri Lanka,medium development,0.782,Excellent,2743851,108146,Moderate Testing (Adequate Coverage),8
+Kazakhstan,high development,0.825,Excellent,10077237,375539,Moderate Testing (Adequate Coverage),9
+Malta,high development,0.895,Excellent,865475,30292,Moderate Testing (Adequate Coverage),10
+United Kingdom,high development,0.932,Excellent,145181353,4432246,Moderate Testing (Adequate Coverage),11
+Rwanda,low development,0.543,Excellent,955920,25116,Moderate Testing (Adequate Coverage),12
+Luxembourg,high development,0.916,Excellent,2652677,67205,Moderate Testing (Adequate Coverage),13
+Saudi Arabia,high development,0.854,Excellent,16838619,417363,Moderate Testing (Adequate Coverage),14
+Norway,high development,0.957,Excellent,5102342,112970,Moderate Testing (Adequate Coverage),15
+Austria,high development,0.922,Excellent,31323111,618870,Moderate Testing (Adequate Coverage),16
