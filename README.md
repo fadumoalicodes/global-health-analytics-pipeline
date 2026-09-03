@@ -10,6 +10,8 @@ Instead of just running simple searches, I built a complete system inside SQL Se
 * Delivery Layer: Permanent Database Views
 * Reporting Layer: Excel Pivot Tables, Pivot Charts, and Interactive Slicers on Excel
 
+![Healthcare Dashboard Preview](health-dashboard-preview.png)
+
 
 ## Part 1: Population Health & Infection Acceleration Pipeline
 
